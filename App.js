@@ -12,6 +12,7 @@ import Landing from './components/Landing'
 import ChoosieProcess from './components/ChoosieProcess'
 import ChoosieStart from './components/ChoosieStart'
 import ChoosieFinish from './components/ChoosieFinish'
+import { ThemeProvider } from 'react-native-elements';
 
 
 
@@ -38,12 +39,14 @@ const Stack = createStackNavigator();
 const App: () => React$Node = () => {
   return (
       <NavigationContainer>
+        <ThemeProvider>
         <Stack.Navigator initialRouteName="Landing">
-          <Stack.Screen name="Landing" component={Landing} options={{ title: 'Chompr' }}/>
+          <Stack.Screen name="Landing" component={Landing} options={{ title: 'choosr' }} />
           <Stack.Screen name="ChoosieProcess" component={ChoosieProcess} options={{title: "Let's Get Started!"}} />
           <Stack.Screen name="ChoosieStart" component={ChoosieStart} options={{title: "CHOMP CHOMP CHOMP"}} />  
           <Stack.Screen name="ChoosieFinish" component={ChoosieFinish} options={{title: "WE DID IT"}} />  
         </Stack.Navigator>
+        </ThemeProvider>
       </NavigationContainer>
   );
 };

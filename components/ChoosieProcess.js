@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, FlatList, View, Button, Text, TextInput, Switch, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; 
+import { Card } from 'react-native-elements';
 import Slider from '@react-native-community/slider';
-
 
 class ChoosieProcess extends Component {
 
@@ -40,7 +40,7 @@ class ChoosieProcess extends Component {
             arr.push('hi')
         }
         return arr.map((chooser, idx) => {
-            return <TextInput placeholder='hey everyone ok' defaultValue={`Chooser ${idx + 1}'s name`} key={idx} id={idx} onChangeText={(text) => this.handleChangeName(text, idx) } />
+            return <TextInput style={{fontSize: 29, alignContent: "center", justifyContent: "center", textAlign: "center"}} placeholder='hey everyone ok' defaultValue={`chooser ${idx + 1}'s name`} key={idx} id={idx} onChangeText={(text) => this.handleChangeName(text, idx) } />
         })
     }
 
@@ -129,7 +129,8 @@ class ChoosieProcess extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{width: "100%", height: "100%", backgroundColor: "rgb(98, 131, 149)" }}>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5 }}>
                 <ScrollView  keyboardShouldPersistTaps='always'>
                     <GooglePlacesAutocomplete
                         placeholder='Search'
@@ -152,23 +153,15 @@ class ChoosieProcess extends Component {
                         fetchDetails={true}
                     />
                 </ScrollView>
-                <View style={styles.container}>
-                    <Button title='-' onPress={ this.state.numChoosers === 1 ? null : () => this.handleNumChange(-1)}></Button>
-                    <Text>{this.state.numChoosers}</Text>
-                    <Button title='+' onPress={this.state.numChoosers === 4 ? null : () => this.handleNumChange(1)}></Button>
-                </View>
-                <View style={styles.container}>
-                    {this.renderNameFields()}
-                </View>
-                <View style={styles.container}>
+                </Card>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                     <Switch
-                         trackColor={{ false: "#767577", true: "#81b0ff" }}
-                         thumbColor={this.state.delivery ? "#f5dd4b" : "#f4f3f4"}
+                         trackColor={{ false: "#767577", true: "rgb(98, 131, 149)" }}
+                         thumbColor={this.state.delivery ? "#f4f3f4" : "#f4f3f4"}
                          onValueChange={this.handleDelivery}
                          value={this.state.delivery}
                     />
-
-                    { !this.state.delivery ? 
+                       { !this.state.delivery ? 
                         <View>
                             <Slider
                                 style={{width: 200, height: 40}}
@@ -177,7 +170,7 @@ class ChoosieProcess extends Component {
                                 minimumValue={1}
                                 maximumValue={15}
                                 minimumTrackTintColor="#FFFFFF"
-                                maximumTrackTintColor="#000000"
+                                maximumTrackTintColor="rgb(98, 131, 149)"
                                 // onSlidingComplete={value => this.setState({takeoutDistanceMiles: value})}
                                 onValueChange={value => this.setState({takeoutDistanceMiles: value})}
                             /> 
@@ -186,28 +179,28 @@ class ChoosieProcess extends Component {
                         :
                         null 
                     }
-                </View>
-                <View> 
+                </Card>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
+                    <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10, padding: 0}}><Button title='-' onPress={ this.state.numChoosers === 1 ? null : () => this.handleNumChange(-1)}></Button></Card>
+                    <Card containerStyle={{backgroundColor: "#EDD9A3",  borderWidth: 0, shadowColor: 'rgba(0,0,0, 0.0)', padding: 0, paddingBottom: -5, marginBottom: -8}}><Card.Title h4>{this.state.numChoosers}</Card.Title></Card>
+                    <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10, padding: 0}}><Button title='+' onPress={this.state.numChoosers === 4 ? null : () => this.handleNumChange(1)}></Button></Card>
+                </Card>
+
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
+                    {this.renderNameFields()}
+                </Card>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
+                <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10}}>
                     <Button 
                         title='LETS GO'
                         onPress={ this.state.lng && this.state.chooserNames ? () => this.props.navigation.navigate('ChoosieStart', { data : this.state}) : null}
                     />
-                </View>
+                    </Card>
+                </Card>
             </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-    //   flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      margin: 20
-    }
-  });
-
-
 
 
 export default ChoosieProcess
