@@ -37,7 +37,7 @@ class ChoosieProcess extends Component {
             arr.push('hi')
         }
         return arr.map((chooser, idx) => {
-            return <TextInput placeholder='hey everyone ok' defaultValue={`Chooser ${idx + 1}'s name`} key={idx} id={idx} onChangeText={(text) => this.handleChangeName(text, idx) } />
+            return <TextInput style={{fontSize: 34, alignContent: "center", justifyContent: "center", textAlign: "center"}} placeholder='hey everyone ok' defaultValue={`chooser ${idx + 1}'s name`} key={idx} id={idx} onChangeText={(text) => this.handleChangeName(text, idx) } />
         })
     }
 
@@ -126,8 +126,8 @@ class ChoosieProcess extends Component {
 
     render() {
         return (
-            <View style={{width: "100%", height: "100%", backgroundColor: "rgb(98, 131, 149)"}}>
-                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10 }}>
+            <View style={{width: "100%", height: "100%", backgroundColor: "rgb(98, 131, 149)" }}>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5 }}>
                 <ScrollView  keyboardShouldPersistTaps='always'>
                     <GooglePlacesAutocomplete
                         placeholder='Search'
@@ -151,7 +151,7 @@ class ChoosieProcess extends Component {
                     />
                 </ScrollView>
                 </Card>
-                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10}}>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                     <Switch
                          trackColor={{ false: "#767577", true: "#81b0ff" }}
                          thumbColor={this.state.delivery ? "#f5dd4b" : "#f4f3f4"}
@@ -159,23 +159,22 @@ class ChoosieProcess extends Component {
                          value={this.state.delivery}
                     />
                 </Card>
-                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10}}>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                     <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10, padding: 0}}><Button title='-' onPress={ this.state.numChoosers === 1 ? null : () => this.handleNumChange(-1)}></Button></Card>
                     <Card containerStyle={{backgroundColor: "#EDD9A3",  borderWidth: 0, shadowColor: 'rgba(0,0,0, 0.0)', padding: 0, paddingBottom: -5, marginBottom: -8}}><Card.Title h4>{this.state.numChoosers}</Card.Title></Card>
                     <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10, padding: 0}}><Button title='+' onPress={this.state.numChoosers === 4 ? null : () => this.handleNumChange(1)}></Button></Card>
                 </Card>
 
-                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10}}>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                     {this.renderNameFields()}
                 </Card>
-                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10}}>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                     <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10}}>
                     <Button
                         color="white"
-                        style={{fontWeight: 'bold', fontSize: 30}}
-                        title='LETS GO'
+                        title='lets go'
                         onPress={() => this.props.navigation.navigate('ChoosieStart', { data : this.state})}
-                   />
+                    />
                     </Card>
                 </Card>
             </View>
