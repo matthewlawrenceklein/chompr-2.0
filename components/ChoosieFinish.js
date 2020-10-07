@@ -30,7 +30,7 @@ class ChoosieFinish extends Component {
         fetch(`https://developers.zomato.com/api/v2.1/search?count=3&lat=${lat}&lon=${lng}&radius=${radius}&cuisines=${cuisineID}&sort=rating`, {
         headers: {
         Accept: "application/json",
-        "User-Key": '7b934257aa35e3ba2609e8d3443b4466'
+        "User-Key": ''
         }})
         .then(resp => resp.json())
         .then(resp => {

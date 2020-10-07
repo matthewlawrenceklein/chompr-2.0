@@ -142,7 +142,7 @@ class ChoosieProcess extends Component {
                         }
 
                         query={{
-                            key: 'AIzaSyDH44dKqH6vI3l222pyIXtWOi9aCqfLSRU',
+                            key: '',
                             language: 'en',
                             types: 'geocode'
                         }}
