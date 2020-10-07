@@ -40,7 +40,7 @@ class ChoosieProcess extends Component {
             arr.push('hi')
         }
         return arr.map((chooser, idx) => {
-            return <TextInput style={{fontSize: 34, alignContent: "center", justifyContent: "center", textAlign: "center"}} placeholder='hey everyone ok' defaultValue={`chooser ${idx + 1}'s name`} key={idx} id={idx} onChangeText={(text) => this.handleChangeName(text, idx) } />
+            return <TextInput style={{fontSize: 29, alignContent: "center", justifyContent: "center", textAlign: "center"}} placeholder='hey everyone ok' defaultValue={`chooser ${idx + 1}'s name`} key={idx} id={idx} onChangeText={(text) => this.handleChangeName(text, idx) } />
         })
     }
 
@@ -143,7 +143,7 @@ class ChoosieProcess extends Component {
                         }
 
                         query={{
-                            key: 'AIzaSyDH44dKqH6vI3l222pyIXtWOi9aCqfLSRU',
+                            key: '',
                             language: 'en',
                             types: 'geocode'
                         }}
@@ -156,11 +156,29 @@ class ChoosieProcess extends Component {
                 </Card>
                 <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                     <Switch
-                         trackColor={{ false: "#767577", true: "#81b0ff" }}
-                         thumbColor={this.state.delivery ? "#f5dd4b" : "#f4f3f4"}
+                         trackColor={{ false: "#767577", true: "rgb(98, 131, 149)" }}
+                         thumbColor={this.state.delivery ? "#f4f3f4" : "#f4f3f4"}
                          onValueChange={this.handleDelivery}
                          value={this.state.delivery}
                     />
+                       { !this.state.delivery ? 
+                        <View>
+                            <Slider
+                                style={{width: 200, height: 40}}
+                                value={5}
+                                step={1}
+                                minimumValue={1}
+                                maximumValue={15}
+                                minimumTrackTintColor="#FFFFFF"
+                                maximumTrackTintColor="rgb(98, 131, 149)"
+                                // onSlidingComplete={value => this.setState({takeoutDistanceMiles: value})}
+                                onValueChange={value => this.setState({takeoutDistanceMiles: value})}
+                            /> 
+                            <Text>Takeout Distance : {this.state.takeoutDistanceMiles} miles</Text>
+                        </View>
+                        :
+                        null 
+                    }
                 </Card>
                 <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                     <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10, padding: 0}}><Button title='-' onPress={ this.state.numChoosers === 1 ? null : () => this.handleNumChange(-1)}></Button></Card>
@@ -173,31 +191,10 @@ class ChoosieProcess extends Component {
                 </Card>
                 <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                 <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10}}>
-
-                    { !this.state.delivery ? 
-                        <View>
-                            <Slider
-                                style={{width: 200, height: 40}}
-                                value={5}
-                                step={1}
-                                minimumValue={1}
-                                maximumValue={15}
-                                minimumTrackTintColor="#FFFFFF"
-                                maximumTrackTintColor="#000000"
-                                // onSlidingComplete={value => this.setState({takeoutDistanceMiles: value})}
-                                onValueChange={value => this.setState({takeoutDistanceMiles: value})}
-                            /> 
-                            <Text>Takeout Distance : {this.state.takeoutDistanceMiles} miles</Text>
-                        </View>
-                        :
-                        null 
-                    }
-                <View> 
                     <Button 
                         title='LETS GO'
                         onPress={ this.state.lng && this.state.chooserNames ? () => this.props.navigation.navigate('ChoosieStart', { data : this.state}) : null}
                     />
-                    </View>
                     </Card>
                 </Card>
             </View>
