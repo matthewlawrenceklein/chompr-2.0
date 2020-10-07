@@ -8,7 +8,7 @@ class ChoosieProcess extends Component {
         lat : '', 
         lng : '', 
         numChoosers : 1,
-        chooserNames : {},
+        // chooserNames : {},
         delivery : true,
         choiceSet : [], 
         cuisines : [],
@@ -16,6 +16,7 @@ class ChoosieProcess extends Component {
 
     componentDidMount(){
         this.getCuisines()
+        console.log(this.state.chooserNames)
     }
 
     handleNumChange = (change) => {
@@ -28,6 +29,7 @@ class ChoosieProcess extends Component {
         this.setState({
             chooserNames : {...this.state.chooserNames, [idx] : name} 
         })
+        console.log(this.state.chooserNames)
     }
 
     renderNameFields = () => {
@@ -138,7 +140,7 @@ class ChoosieProcess extends Component {
                         }
 
                         query={{
-                            key: '',
+                            key: 'AIzaSyDH44dKqH6vI3l222pyIXtWOi9aCqfLSRU',
                             language: 'en',
                             types: 'geocode'
                         }}
@@ -164,10 +166,10 @@ class ChoosieProcess extends Component {
                          value={this.state.delivery}
                     />
                 </View>
-                <View>
+                <View> 
                     <Button 
                         title='LETS GO'
-                        onPress={() => this.props.navigation.navigate('ChoosieStart', { data : this.state})}
+                        onPress={ this.state.lng && this.state.chooserNames ? () => this.props.navigation.navigate('ChoosieStart', { data : this.state}) : null}
                     />
                 </View>
             </View>
