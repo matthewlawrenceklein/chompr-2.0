@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { ScrollView, FlatList, View, Button, Text, TextInput, Switch, StyleSheet } from 'react-native';
 import ChoiceCard from './ChoiceCard'
+import TurnMechanism from './TurnMechanism'
 
 class ChoosieStart extends Component {
 
     state = {
         choiceSet : [], 
         cuisines : [], 
-        chooserNames : {},
+        chooserNames : [],
         delivery : true, 
         numChoosers : 0, 
         lat : '', 
@@ -16,10 +17,12 @@ class ChoosieStart extends Component {
 
     componentDidMount(){
         const { choiceSet, cuisines, chooserNames, delivery, numChoosers, lat, lng } = this.props.route.params.data 
+        const nameArray = Object.values(chooserNames).filter(name => name.length > 0)
+
         this.setState({
             choiceSet : choiceSet, 
             cuisines : cuisines, 
-            chooserNames : chooserNames, 
+            chooserNames : nameArray, 
             delivery : delivery, 
             numChoosers : numChoosers, 
             lat : lat, 
@@ -54,6 +57,10 @@ class ChoosieStart extends Component {
     render() {
         return (
            <View>
+               <TurnMechanism
+                    chooserNames={this.state.chooserNames}
+                    turnCount={this.state.turnCount}
+               />
                { this.renderChoices() }
                { this.state.turnCount === 7 ? this.moveForward() : null }
            </View>
