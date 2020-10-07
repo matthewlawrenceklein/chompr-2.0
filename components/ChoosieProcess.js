@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ScrollView, FlatList, View, Button, Text, TextInput, Switch, StyleSheet } from 'react-native';
+import { ScrollView, FlatList, View, Text, TextInput, Switch, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; 
+import { Button, Card } from 'react-native-elements';
 
 class ChoosieProcess extends Component {
 
@@ -125,7 +126,7 @@ class ChoosieProcess extends Component {
 
     render() {
         return (
-            <View>
+            <View  style={{width: "100%", height: "100%", backgroundColor: "rgb(98, 131, 149)"}}>
                 <ScrollView  keyboardShouldPersistTaps='always'>
                     <GooglePlacesAutocomplete
                         placeholder='Search'
@@ -138,7 +139,7 @@ class ChoosieProcess extends Component {
                         }
 
                         query={{
-                            key: '',
+                            key: "",
                             language: 'en',
                             types: 'geocode'
                         }}
@@ -166,6 +167,7 @@ class ChoosieProcess extends Component {
                 </View>
                 <View>
                     <Button 
+                        buttonStyle={{backgroundColor: "rgb(45, 48, 71)", margin: "1%", padding: "5%", borderRadius: 10}}
                         title='LETS GO'
                         onPress={() => this.props.navigation.navigate('ChoosieStart', { data : this.state})}
                     />
@@ -177,10 +179,10 @@ class ChoosieProcess extends Component {
 
 const styles = StyleSheet.create({
     container: {
-    //   flex: 1,
+      flex: 2,
       alignItems: "center",
       justifyContent: "center",
-      margin: 20
+      margin: 10
     }
   });
 
