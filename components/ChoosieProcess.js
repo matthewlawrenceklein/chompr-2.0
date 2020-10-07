@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, FlatList, View, Button, Text, TextInput, Switch, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; 
+import Slider from '@react-native-community/slider';
+
 
 class ChoosieProcess extends Component {
 
@@ -12,11 +14,11 @@ class ChoosieProcess extends Component {
         delivery : true,
         choiceSet : [], 
         cuisines : [],
+        takeoutDistanceMiles : 1
     }
 
     componentDidMount(){
         this.getCuisines()
-        console.log(this.state.chooserNames)
     }
 
     handleNumChange = (change) => {
@@ -165,6 +167,25 @@ class ChoosieProcess extends Component {
                          onValueChange={this.handleDelivery}
                          value={this.state.delivery}
                     />
+
+                    { !this.state.delivery ? 
+                        <View>
+                            <Slider
+                                style={{width: 200, height: 40}}
+                                value={5}
+                                step={1}
+                                minimumValue={1}
+                                maximumValue={15}
+                                minimumTrackTintColor="#FFFFFF"
+                                maximumTrackTintColor="#000000"
+                                // onSlidingComplete={value => this.setState({takeoutDistanceMiles: value})}
+                                onValueChange={value => this.setState({takeoutDistanceMiles: value})}
+                            /> 
+                            <Text>Takeout Distance : {this.state.takeoutDistanceMiles} miles</Text>
+                        </View>
+                        :
+                        null 
+                    }
                 </View>
                 <View> 
                     <Button 
