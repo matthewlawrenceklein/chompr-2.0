@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, FlatList, View, Button, Text, TextInput, Switch, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; 
 import { Card } from 'react-native-elements';
+import Slider from '@react-native-community/slider';
 
 class ChoosieProcess extends Component {
 
@@ -9,10 +10,11 @@ class ChoosieProcess extends Component {
         lat : '', 
         lng : '', 
         numChoosers : 1,
-        chooserNames : {},
+        // chooserNames : {},
         delivery : true,
         choiceSet : [], 
         cuisines : [],
+        takeoutDistanceMiles : 1
     }
 
     componentDidMount(){
@@ -29,6 +31,7 @@ class ChoosieProcess extends Component {
         this.setState({
             chooserNames : {...this.state.chooserNames, [idx] : name} 
         })
+        console.log(this.state.chooserNames)
     }
 
     renderNameFields = () => {
@@ -140,7 +143,7 @@ class ChoosieProcess extends Component {
                         }
 
                         query={{
-                            key: '',
+                            key: 'AIzaSyDH44dKqH6vI3l222pyIXtWOi9aCqfLSRU',
                             language: 'en',
                             types: 'geocode'
                         }}
@@ -169,12 +172,32 @@ class ChoosieProcess extends Component {
                     {this.renderNameFields()}
                 </Card>
                 <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
-                    <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10}}>
-                    <Button
-                        color="white"
-                        title='lets go'
-                        onPress={() => this.props.navigation.navigate('ChoosieStart', { data : this.state})}
+                <Card containerStyle={{backgroundColor: "rgb(45, 48, 71)", borderRadius: 10}}>
+
+                    { !this.state.delivery ? 
+                        <View>
+                            <Slider
+                                style={{width: 200, height: 40}}
+                                value={5}
+                                step={1}
+                                minimumValue={1}
+                                maximumValue={15}
+                                minimumTrackTintColor="#FFFFFF"
+                                maximumTrackTintColor="#000000"
+                                // onSlidingComplete={value => this.setState({takeoutDistanceMiles: value})}
+                                onValueChange={value => this.setState({takeoutDistanceMiles: value})}
+                            /> 
+                            <Text>Takeout Distance : {this.state.takeoutDistanceMiles} miles</Text>
+                        </View>
+                        :
+                        null 
+                    }
+                <View> 
+                    <Button 
+                        title='LETS GO'
+                        onPress={ this.state.lng && this.state.chooserNames ? () => this.props.navigation.navigate('ChoosieStart', { data : this.state}) : null}
                     />
+                    </View>
                     </Card>
                 </Card>
             </View>
