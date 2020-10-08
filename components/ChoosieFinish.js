@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, FlatList, View, Button, Text, TextInput, Switch, StyleSheet } from 'react-native';
+import { Card } from 'react-native-elements';
 
 class ChoosieFinish extends Component {
 

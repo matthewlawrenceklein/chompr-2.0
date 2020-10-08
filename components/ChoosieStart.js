@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, FlatList, View, Button, Text, TextInput, Switch, StyleSheet } from 'react-native';
 import ChoiceCard from './ChoiceCard'
 import TurnMechanism from './TurnMechanism'
+import { Card } from 'react-native-elements';
 
 class ChoosieStart extends Component {
 
@@ -33,8 +34,9 @@ class ChoosieStart extends Component {
 
     renderChoices = () => {
         return this.state.cuisines.map((choice, idx) => {
-            return ( 
-                <ChoiceCard key={idx} name={choice.name} whenPressed={() => this.handleChoiceSelect(choice.name)}/> 
+            return (<View>
+                <ChoiceCard key={idx} name={choice.name} whenPressed={() => this.handleChoiceSelect(choice.name)}/>
+                </View> 
             )
         })
     }
@@ -44,23 +46,21 @@ class ChoosieStart extends Component {
             choiceSet : this.state.choiceSet.filter(choice => choice.name !== cuisineName),
             turnCount : this.state.turnCount + 1 
         })
-        // <Text style={{ textDecorationLine: 'line-through' }}>    Strike Through the Text</Text>
     }
 
     moveForward = () => {
         this.props.navigation.navigate('ChoosieFinish', { data : this.state})    
     }
 
-    // render out 8 cards 
-    // render out a 'turn watcher container' that displays current chooser and a time clock 
-
     render() {
         return (
-           <View>
+           <View style={{width: "100%", height: "100%", backgroundColor: "rgb(45, 48, 71)" }}>
+               <Card containerStyle={{backgroundColor: "#EBF5FF", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
                <TurnMechanism
                     chooserNames={this.state.chooserNames}
                     turnCount={this.state.turnCount}
                />
+               </Card>
                { this.renderChoices() }
                { this.state.turnCount === 7 ? this.moveForward() : null }
            </View>
