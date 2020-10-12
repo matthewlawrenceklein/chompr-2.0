@@ -46,9 +46,8 @@ class TurnMechanism extends Component {
 
     render() {
         return (
-            <View>
-                <Text> YOU HAVE {this.state.counter} SECONDS </Text>
-                <Text> {this.state.currentShuffle[0]}'s TURN</Text>
+            <View style={{display: "flex", flexDirection: 'row'}}>
+                <Text style={{fontSize: 30, textAlign: "left", flex: 1, fontWeight: 'bold', color: "rgb(45, 48, 71)"}}> {this.state.currentShuffle[0]}</Text><Text style={{fontSize: 30, textAlign: "right", flex: 1, fontWeight: 'bold', color: "rgb(45, 48, 71)"}}> :{this.state.counter}</Text>
             </View>
         );
     }
