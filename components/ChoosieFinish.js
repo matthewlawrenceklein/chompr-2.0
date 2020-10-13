@@ -8,7 +8,8 @@ class ChoosieFinish extends Component {
         name : '', 
         location : '', 
         featured_image : '', 
-        menu : ''
+        menu : '',
+        restaurantArray : []
     }
 
     shuffle = (a) => {
@@ -25,10 +26,10 @@ class ChoosieFinish extends Component {
     componentDidMount(){
         const { choiceSet, delivery, lat, lng } = this.props.route.params.data 
         const cuisineID = choiceSet[0].id
-        const radius = delivery === true ? 3000 : 6000 
+        const radius = delivery === true ? 6000 : [this.props.takeoutDistanceMiles * 1609] 
         console.log(choiceSet, delivery, lat, lng)
 
-        fetch(`https://developers.zomato.com/api/v2.1/search?count=3&lat=${lat}&lon=${lng}&radius=${radius}&cuisines=${cuisineID}&sort=rating`, {
+        fetch(`https://developers.zomato.com/api/v2.1/search?count=5&lat=${lat}&lon=${lng}&radius=${radius}&cuisines=${cuisineID}&sort=rating`, {
         headers: {
         Accept: "application/json",
         "User-Key": ''
@@ -41,10 +42,21 @@ class ChoosieFinish extends Component {
                 name : name, 
                 location : location.address,
                 featured_image : featured_image, 
-                menu : menu_url
+                menu : menu_url, 
+                restaurantArray : restaurants
             })
-            console.log(this.state)
         })  
+    }
+
+    changeRestaurantOption = () => {
+        const shuffled = this.shuffle(this.state.restaurantArray)
+        const { name, location, featured_image, menu_url } = shuffled[0].restaurant
+        this.setState({
+            name : name, 
+            location : location.address,
+            featured_image : featured_image, 
+            menu : menu_url
+        })
     }
 
     
@@ -57,11 +69,17 @@ class ChoosieFinish extends Component {
                     <Card.Title style={{fontSize: 30}}>{this.state.name}</Card.Title>
                 </Card>
                 <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "rgb(98, 131, 149)", borderWidth: 5}}>
-                    { this.state.featured_image ? <Image  style={{ width: 200, height: 200, left: "20%", margin: 15, borderRadius: 10 }} source={{uri: imageLink }}/> : null }
+                    { this.state.featured_image ? <Image  style={{ width: 200, height: 200, left: "16%", margin: 15, borderRadius: 10 }} source={{uri: imageLink }}/> : null }
                     <Card.Title style={{margin: 10 }}>{this.state.location}</Card.Title>
                 </Card>
                 <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "rgb(98, 131, 149)", borderWidth: 5}}>
-                    <Card.Title onPress={() => Linking.openURL(url)} style={{color: "rgb(98, 131, 149)", fontSize: 24}} >menu</Card.Title>
+                    <Card.Title onPress={() => Linking.openURL(url)} style={{color: "rgb(98, 131, 149)", fontSize: 24}} >Restaurant Menu</Card.Title>
+                </Card>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "rgb(98, 131, 149)", borderWidth: 5}}>
+                    <Card.Title onPress={() => this.changeRestaurantOption()} style={{color: "rgb(98, 131, 149)", fontSize: 24}} >More Options</Card.Title>
+                </Card>
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "rgb(98, 131, 149)", borderWidth: 5}}>
+                    <Card.Title onPress={() => this.props.navigation.navigate('Landing')} style={{color: "rgb(98, 131, 149)", fontSize: 24}} >Home</Card.Title>
                 </Card>
             </View>
         );

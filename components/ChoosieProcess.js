@@ -10,7 +10,6 @@ class ChoosieProcess extends Component {
         lat : '', 
         lng : '', 
         numChoosers : 1,
-        // chooserNames : {},
         delivery : true,
         choiceSet : [], 
         cuisines : [],
@@ -154,23 +153,26 @@ class ChoosieProcess extends Component {
                     />
                 </ScrollView>
                 </Card>
-                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5}}>
-                    <Switch
-                         trackColor={{ false: "#767577", true: "rgb(98, 131, 149)" }}
-                         thumbColor={this.state.delivery ? "#f4f3f4" : "#f4f3f4"}
-                         onValueChange={this.handleDelivery}
-                         value={this.state.delivery}
-                    />
+                <Card containerStyle={{backgroundColor: "#EDD9A3", borderRadius:10, borderColor: "#CC8B8C", borderWidth: 5, justifyContent: "center", textAlign: "center", alignItems: "center"}}>
+                    <Text style={{justifyContent: "center", textAlign: "center", fontSize: 16, paddingBottom: 6 }}> {this.state.delivery ? 'Delivery' : 'Takeout'}</Text>
+                    <View style={{justifyContent: "center", textAlign: "center", alignItems: 'center'}}>
+                        <Switch 
+                            trackColor={{ true: "#767577", false: "rgb(98, 131, 149)" }}
+                            thumbColor={this.state.delivery ? "#f4f3f4" : "#f4f3f4"}
+                            onValueChange={this.handleDelivery}
+                            value={this.state.delivery}
+                        />
+                    </View>
                        { !this.state.delivery ? 
-                        <View>
+                        <View containerStyle={{alignSelf: 'center', justifyContent: 'center', alignItems: 'center'}}>
                             <Slider
-                                style={{width: 200, height: 40}}
+                                style={{width: 200, height: 40, }}
                                 value={5}
                                 step={1}
                                 minimumValue={1}
                                 maximumValue={15}
-                                minimumTrackTintColor="#FFFFFF"
-                                maximumTrackTintColor="rgb(98, 131, 149)"
+                                minimumTrackTintColor="rgb(98, 131, 149)"
+                                maximumTrackTintColor="#FFFFFF"
                                 // onSlidingComplete={value => this.setState({takeoutDistanceMiles: value})}
                                 onValueChange={value => this.setState({takeoutDistanceMiles: value})}
                             /> 

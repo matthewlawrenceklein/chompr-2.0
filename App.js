@@ -42,9 +42,9 @@ const App: () => React$Node = () => {
         <ThemeProvider>
         <Stack.Navigator initialRouteName="Landing">
           <Stack.Screen name="Landing" component={Landing} options={{ title: 'choosr' }} />
-          <Stack.Screen name="ChoosieProcess" component={ChoosieProcess} options={{title: "Let's Get Started!"}} />
-          <Stack.Screen name="ChoosieStart" component={ChoosieStart} options={{title: "CHOMP CHOMP CHOMP"}} />  
-          <Stack.Screen name="ChoosieFinish" component={ChoosieFinish} options={{title: "WE DID IT"}} />  
+          <Stack.Screen name="ChoosieProcess" component={ChoosieProcess} options={{title: "Let's Start!"}} />
+          <Stack.Screen name="ChoosieStart" component={ChoosieStart} options={{title: "Let's Choose!"}} />  
+          <Stack.Screen name="ChoosieFinish" component={ChoosieFinish} options={{title: "Let's Eat!"}} />  
         </Stack.Navigator>
         </ThemeProvider>
       </NavigationContainer>
