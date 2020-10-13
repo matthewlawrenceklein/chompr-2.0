@@ -1,10 +1,27 @@
 # chompr
-## An iOS App for Choosing Food
+
+#### An iOS App for Choosing Food
+
+-------------
+## Preview 
 
 <div>
-  <img src="https://i.imgur.com/yolYuMa.png" width="235">
-  <img src="https://i.imgur.com/4pWPIjc.png" width='235'>
-  <img src="https://i.imgur.com/PpBbpO0.png" width='235'>
-  <img src="https://i.imgur.com/bXx0CgT.png" width='235'>
+  <img style="display: inline;" src="https://i.imgur.com/yolYuMa.png" width="220" alt="">
+  <img style="display: inline;" src="https://i.imgur.com/4pWPIjc.png" width='220' alt="">
+  <img style="display: inline;" src="https://i.imgur.com/PpBbpO0.png" width='220' alt="">
+  <img style="display: inline;" src="https://i.imgur.com/bXx0CgT.png" width='220' alt="">
+<div>  
+<!-- -->
 
-<div>
+## Technologies
+- React-Native 
+- React-Native-Elements 
+
+## Contributors   
+
+* <a href="http://matthewlawrencekle.in/" target="_blank" >Matthew Klein</a>
+* <a href="https://evereichmann.github.io/portfolio/" target="_blank" >Eve Reichmann</a>
+
+
+  
+
